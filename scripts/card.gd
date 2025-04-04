@@ -19,8 +19,8 @@ var suit_names = {
 
 var _rank: int
 var _suit: Suit
-var value: int
 var _file_name: String
+var value: int
 
 func _init(rank: int, suit: Suit) -> void:
 	_rank = rank
@@ -31,14 +31,15 @@ func _init(rank: int, suit: Suit) -> void:
 	card_amount += 1
 	
 func get_file_name() -> String:
-	var rank_string: String = get_rank_string()
-	#var suit_string: String = get_suit_string()
-	return "card" + suit_names[_suit] + rank_string + ".png"
+	return "card" + get_suit() + get_rank() + ".png"
 
-func get_rank_string() -> String:
+func get_rank() -> String:
 	match _rank:
 		1: return "A"
 		11: return "J"
 		12: return "Q"
 		13: return "K"
 		_: return str(_rank)
+
+func get_suit() -> String:
+	return suit_names[_suit]
