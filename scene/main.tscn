@@ -1,0 +1,214 @@
+[gd_scene load_steps=4 format=3 uid="uid://ctrdsct0qbj31"]
+
+[ext_resource type="Script" path="res://scene/model.gd" id="1_7ob6b"]
+[ext_resource type="Script" path="res://scene/views.gd" id="2_d1ytg"]
+[ext_resource type="Script" path="res://scene/controller.gd" id="3_0sh7j"]
+
+[node name="main" type="Node"]
+
+[node name="Menu" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Model" type="Node" parent="."]
+script = ExtResource("1_7ob6b")
+
+[node name="Views" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("2_d1ytg")
+
+[node name="ViewBet" type="Control" parent="Views"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="BetMenu" type="Button" parent="Views/ViewBet"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -53.0
+offset_bottom = 31.0
+grow_horizontal = 0
+text = "Menu"
+
+[node name="VBoxBetContainer" type="VBoxContainer" parent="Views/ViewBet"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -368.0
+offset_top = -87.0
+offset_right = 368.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="HBoxBetDisplayContainer" type="HBoxContainer" parent="Views/ViewBet/VBoxBetContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="BetLabelBet" type="Label" parent="Views/ViewBet/VBoxBetContainer/HBoxBetDisplayContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "Aposta: 1"
+
+[node name="BetLabelBank" type="Label" parent="Views/ViewBet/VBoxBetContainer/HBoxBetDisplayContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "Banco: 50"
+
+[node name="HBoxBetContainer" type="HBoxContainer" parent="Views/ViewBet/VBoxBetContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="BetAddButton" type="Button" parent="Views/ViewBet/VBoxBetContainer/HBoxBetContainer"]
+custom_minimum_size = Vector2(144, 60)
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Adicionar"
+
+[node name="Bet01Button" type="Button" parent="Views/ViewBet/VBoxBetContainer/HBoxBetContainer"]
+custom_minimum_size = Vector2(144, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "01"
+
+[node name="Bet05Button" type="Button" parent="Views/ViewBet/VBoxBetContainer/HBoxBetContainer"]
+custom_minimum_size = Vector2(144, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "05"
+
+[node name="Bet10Button" type="Button" parent="Views/ViewBet/VBoxBetContainer/HBoxBetContainer"]
+custom_minimum_size = Vector2(144, 60)
+layout_mode = 2
+size_flags_horizontal = 10
+text = "10"
+
+[node name="BetConfirmButton" type="Button" parent="Views/ViewBet/VBoxBetContainer/HBoxBetContainer"]
+custom_minimum_size = Vector2(144, 60)
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Confirmar"
+
+[node name="ViewPlayer" type="Control" parent="Views"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DealerHand" type="HBoxContainer" parent="Views/ViewPlayer"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="PlayerUI" type="VBoxContainer" parent="Views/ViewPlayer"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = -40.0
+offset_right = 2.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="PlayerDisplay" type="HBoxContainer" parent="Views/ViewPlayer/PlayerUI"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="PlayerLabelBet" type="Label" parent="Views/ViewPlayer/PlayerUI/PlayerDisplay"]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "Aposta: 1"
+
+[node name="PlayerLabelScore" type="Label" parent="Views/ViewPlayer/PlayerUI/PlayerDisplay"]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "Pontos: 0"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Views/ViewPlayer/PlayerUI"]
+layout_mode = 2
+
+[node name="PlayerHand" type="HBoxContainer" parent="Views/ViewPlayer/PlayerUI/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PlayerButtons" type="VBoxContainer" parent="Views/ViewPlayer/PlayerUI/HBoxContainer"]
+layout_mode = 2
+
+[node name="PlayerSplitButton" type="Button" parent="Views/ViewPlayer/PlayerUI/HBoxContainer/PlayerButtons"]
+visible = false
+layout_mode = 2
+text = "Dividir"
+
+[node name="PlayerHitButton" type="Button" parent="Views/ViewPlayer/PlayerUI/HBoxContainer/PlayerButtons"]
+layout_mode = 2
+text = "Comprar"
+
+[node name="PlayerConfirmButton" type="Button" parent="Views/ViewPlayer/PlayerUI/HBoxContainer/PlayerButtons"]
+layout_mode = 2
+text = "Confirmar"
+
+[node name="ViewPlayerSplit" type="Control" parent="Views"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ViewDealer" type="Control" parent="Views"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Controller" type="Node" parent="."]
+script = ExtResource("3_0sh7j")
+
+[connection signal="bank_update" from="Model" to="Controller" method="_on_model_bank_update"]
+[connection signal="bet_update" from="Model" to="Controller" method="_on_model_bet_update"]
+[connection signal="hit_update" from="Model" to="Controller" method="_on_model_hit_update"]
+[connection signal="score_update" from="Model" to="Controller" method="_on_model_score_update"]
+[connection signal="split_update" from="Model" to="Controller" method="_on_model_split_update"]
+[connection signal="button_down" from="Views/ViewBet/VBoxBetContainer/HBoxBetContainer/BetAddButton" to="Controller" method="_on_bet_add_button_down"]
+[connection signal="button_down" from="Views/ViewBet/VBoxBetContainer/HBoxBetContainer/Bet01Button" to="Controller" method="_on_bet_button_down" binds= [1]]
+[connection signal="button_down" from="Views/ViewBet/VBoxBetContainer/HBoxBetContainer/Bet05Button" to="Controller" method="_on_bet_button_down" binds= [5]]
+[connection signal="button_down" from="Views/ViewBet/VBoxBetContainer/HBoxBetContainer/Bet10Button" to="Controller" method="_on_bet_button_down" binds= [10]]
+[connection signal="button_down" from="Views/ViewBet/VBoxBetContainer/HBoxBetContainer/BetConfirmButton" to="Controller" method="_on_bet_confirm_button_down"]
+[connection signal="button_down" from="Views/ViewPlayer/PlayerUI/HBoxContainer/PlayerButtons/PlayerSplitButton" to="Controller" method="_on_player_split_button_button_down"]
+[connection signal="button_down" from="Views/ViewPlayer/PlayerUI/HBoxContainer/PlayerButtons/PlayerHitButton" to="Controller" method="_on_player_hit_button_down"]
+[connection signal="button_down" from="Views/ViewPlayer/PlayerUI/HBoxContainer/PlayerButtons/PlayerConfirmButton" to="Controller" method="_on_player_confirm_button_down"]
