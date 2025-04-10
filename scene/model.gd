@@ -117,7 +117,4 @@ func evaluate_hand():
 func split_hand():
 	player_split = true
 	player_hand_split.append(player_hand.pop_back())
-	draw_card(player_hand)
-	print("Player hand: " + player_hand[0].get_rank() + " " + player_hand[1].get_rank())
-	draw_card(player_hand_split)
 #endregion

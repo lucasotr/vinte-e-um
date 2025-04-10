@@ -25,6 +25,12 @@ class_name View extends Control
 
 #region View Player Split
 @onready var view_player_split: Control = $ViewPlayerSplit
+@onready var view_player_split_dealer_hand: HBoxContainer = $ViewDealer/DealerDealerHand
+@onready var view_player_split_hand_1: HBoxContainer = $ViewPlayerSplit/SplitPlayerUI/VBoxContainer/SplitHand1
+@onready var view_player_split_score_label_1: Label = $ViewPlayerSplit/SplitPlayerUI/VBoxContainer/HBoxContainer/SplitScoreLabel1
+@onready var view_player_split_hand_2: HBoxContainer = $ViewPlayerSplit/SplitPlayerUI/VBoxContainer2/SplitHand2
+@onready var view_player_split_score_label_2: Label = $ViewPlayerSplit/SplitPlayerUI/VBoxContainer2/HBoxContainer/SplitScoreLabel2
+@onready var view_player_split_bet_label: Label = $ViewPlayerSplit/SplitPlayerUI/VBoxContainer3/SplitBetLabel
 
 #endregion
 

@@ -187,6 +187,84 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="SplitMenuButton" type="Button" parent="Views/ViewPlayerSplit"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -53.0
+offset_bottom = 31.0
+grow_horizontal = 0
+text = "Menu"
+
+[node name="SplitDealerHand" type="HBoxContainer" parent="Views/ViewPlayerSplit"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="SplitPlayerUI" type="HBoxContainer" parent="Views/ViewPlayerSplit"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -45.5
+offset_top = -43.0
+offset_right = 45.5
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Views/ViewPlayerSplit/SplitPlayerUI"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Views/ViewPlayerSplit/SplitPlayerUI/VBoxContainer"]
+layout_mode = 2
+
+[node name="SplitHitButton1" type="Button" parent="Views/ViewPlayerSplit/SplitPlayerUI/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Comprar"
+
+[node name="SplitScoreLabel1" type="Label" parent="Views/ViewPlayerSplit/SplitPlayerUI/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Pontos"
+
+[node name="SplitHand1" type="HBoxContainer" parent="Views/ViewPlayerSplit/SplitPlayerUI/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Views/ViewPlayerSplit/SplitPlayerUI"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Views/ViewPlayerSplit/SplitPlayerUI/VBoxContainer2"]
+layout_mode = 2
+
+[node name="SplitHitButton2" type="Button" parent="Views/ViewPlayerSplit/SplitPlayerUI/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+text = "Comprar"
+
+[node name="SplitScoreLabel2" type="Label" parent="Views/ViewPlayerSplit/SplitPlayerUI/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+text = "Pontos"
+
+[node name="SplitHand2" type="HBoxContainer" parent="Views/ViewPlayerSplit/SplitPlayerUI/VBoxContainer2"]
+layout_mode = 2
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="Views/ViewPlayerSplit/SplitPlayerUI"]
+layout_mode = 2
+
+[node name="SplitBetLabel" type="Label" parent="Views/ViewPlayerSplit/SplitPlayerUI/VBoxContainer3"]
+layout_mode = 2
+text = "Aposta: "
+
+[node name="SplitConfirmButton" type="Button" parent="Views/ViewPlayerSplit/SplitPlayerUI/VBoxContainer3"]
+layout_mode = 2
+text = "Confirmar"
+
 [node name="ViewDealer" type="Control" parent="Views"]
 visible = false
 layout_mode = 1
@@ -195,6 +273,75 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="DealerMenuButton" type="Button" parent="Views/ViewDealer"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -53.0
+offset_bottom = 31.0
+grow_horizontal = 0
+text = "Menu"
+
+[node name="DealerDealerHand" type="HBoxContainer" parent="Views/ViewDealer"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="DealerScoreContainer" type="HBoxContainer" parent="Views/ViewDealer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DealerPlayerScore" type="Label" parent="Views/ViewDealer/DealerScoreContainer"]
+layout_mode = 2
+text = "Pontos: "
+
+[node name="DealerDealerScore" type="Label" parent="Views/ViewDealer/DealerScoreContainer"]
+layout_mode = 2
+text = "Pontos: "
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Views/ViewDealer"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="DealerPlayerHand" type="HBoxContainer" parent="Views/ViewDealer/HBoxContainer"]
+layout_mode = 2
+
+[node name="DealerBetScoreContainer" type="VBoxContainer" parent="Views/ViewDealer/HBoxContainer"]
+layout_mode = 2
+
+[node name="DealerBetLabel" type="Label" parent="Views/ViewDealer/HBoxContainer/DealerBetScoreContainer"]
+layout_mode = 2
+text = "Aposta:"
+
+[node name="DealerBankLabel" type="Label" parent="Views/ViewDealer/HBoxContainer/DealerBetScoreContainer"]
+layout_mode = 2
+text = "Banco: "
 
 [node name="Controller" type="Node" parent="."]
 script = ExtResource("3_0sh7j")
@@ -212,3 +359,6 @@ script = ExtResource("3_0sh7j")
 [connection signal="button_down" from="Views/ViewPlayer/PlayerUI/HBoxContainer/PlayerButtons/PlayerSplitButton" to="Controller" method="_on_player_split_button_button_down"]
 [connection signal="button_down" from="Views/ViewPlayer/PlayerUI/HBoxContainer/PlayerButtons/PlayerHitButton" to="Controller" method="_on_player_hit_button_down"]
 [connection signal="button_down" from="Views/ViewPlayer/PlayerUI/HBoxContainer/PlayerButtons/PlayerConfirmButton" to="Controller" method="_on_player_confirm_button_down"]
+[connection signal="button_down" from="Views/ViewPlayerSplit/SplitPlayerUI/VBoxContainer/HBoxContainer/SplitHitButton1" to="Controller" method="_on_split_hit_button_1_button_down"]
+[connection signal="button_down" from="Views/ViewPlayerSplit/SplitPlayerUI/VBoxContainer2/HBoxContainer/SplitHitButton2" to="Controller" method="_on_split_hit_button_2_button_down"]
+[connection signal="button_down" from="Views/ViewPlayerSplit/SplitPlayerUI/VBoxContainer3/SplitConfirmButton" to="Controller" method="_on_split_confirm_button_button_down"]
