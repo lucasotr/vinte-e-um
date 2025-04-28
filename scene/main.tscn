@@ -312,6 +312,11 @@ grow_vertical = 2
 layout_mode = 2
 text = "Pontos: "
 
+[node name="DealerPlayerSplitScore" type="Label" parent="Views/ViewDealer/DealerScoreContainer"]
+visible = false
+layout_mode = 2
+text = "Pontos: "
+
 [node name="DealerDealerScore" type="Label" parent="Views/ViewDealer/DealerScoreContainer"]
 layout_mode = 2
 text = "Pontos: "
@@ -348,6 +353,7 @@ script = ExtResource("3_0sh7j")
 
 [connection signal="bank_update" from="Model" to="Controller" method="_on_model_bank_update"]
 [connection signal="bet_update" from="Model" to="Controller" method="_on_model_bet_update"]
+[connection signal="hit_split_update" from="Model" to="Controller" method="_on_model_hit_split_update"]
 [connection signal="hit_update" from="Model" to="Controller" method="_on_model_hit_update"]
 [connection signal="score_update" from="Model" to="Controller" method="_on_model_score_update"]
 [connection signal="split_update" from="Model" to="Controller" method="_on_model_split_update"]

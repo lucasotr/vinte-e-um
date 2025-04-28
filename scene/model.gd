@@ -5,6 +5,7 @@ signal bank_update
 signal score_update
 signal split_update
 signal hit_update
+signal hit_split_update
 
 
 #region Game Start / Game End
@@ -62,7 +63,6 @@ func change_bet(value: int):
 func confirm_bet():
 	confirmed_bet = bet
 	bank = bank - bet
-	print(str(confirmed_bet) + " " + str(bank))
 	bank_update.emit()
 	bet = 1
 
@@ -70,7 +70,7 @@ func confirm_bet():
 
 #region View Player
 func draw_card(hand: Array) -> int:
-	#hand.append(Card.new(1,0))
+	#hand.append(Card.new(8, 0))
 	hand.append(deck.pop_back())
 	score_hand(hand)
 	return hand.size() - 1
@@ -98,7 +98,10 @@ func score_hand(hand: Array):
 		dealer_hand_score = score
 	
 	if score > 20:
-		hit_update.emit()
+		if hand == player_hand:
+			hit_update.emit()
+		if hand == player_hand_split:
+			hit_split_update.emit()
 	
 	score_update.emit()
 
@@ -106,7 +109,8 @@ func evaluate_hand():
 	# This happens in the first turn
 	if player_hand[0].get_rank() == player_hand[1].get_rank():
 		same_card_rank = true
-		split_update.emit()
+		if confirmed_bet <= bank:
+			split_update.emit()
 	else:
 		same_card_rank = false
 
@@ -115,6 +119,31 @@ func evaluate_hand():
 
 #region Split Hand
 func split_hand():
+	bank -= confirmed_bet
+	confirmed_bet *= 2
 	player_split = true
 	player_hand_split.append(player_hand.pop_back())
+#endregion
+
+#region Dealer
+func dealer_turn():
+	# Dealer buys until 17
+	while dealer_hand_score <= 17:
+		draw_card(dealer_hand)
+		score_hand(dealer_hand)
+	
+	if dealer_hand_score > 21:
+		print("Dealer bust: " + str(dealer_hand_score) + " Hand size: " + str(dealer_hand.size()) )
+		for card in dealer_hand:
+			print("Card: " +  str(card.value))
+	else:
+		print("Dealer score: " + str(dealer_hand_score) + " Hand size: " + str(dealer_hand.size()) )
+		for card in dealer_hand:
+			print("Card: " +  str(card.value))
+
+func dealer_score():
+	var player_bust: bool = true if player_hand_score > 21 else false
+	var dealer_bust: bool = true if dealer_hand_score > 21 else false	
+	
+
 #endregion

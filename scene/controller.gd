@@ -45,7 +45,7 @@ func _on_bet_confirm_button_down() -> void:
 #region View Player
 func show_view_player():
 	view.view_player.show()
-	
+	view.view_player_bet_label.text = "Aposta: " + str(model.confirmed_bet)
 	view.view_player_player_hand.add_child(model.player_hand[model.draw_card(model.player_hand)])
 	view.view_player_player_hand.add_child(model.player_hand[model.draw_card(model.player_hand)])
 	model.evaluate_hand()
@@ -55,29 +55,11 @@ func show_view_player():
 
 func _on_model_score_update() -> void:
 	view.view_player_score_label.text = "Pontos: " + str(model.player_hand_score)
+	view.view_player_split_score_label_1.text = "Pontos: " + str(model.player_hand_score)
+	view.view_player_split_score_label_2.text = "Pontos: " + str(model.player_hand_split_score)
 	
 func _on_model_split_update() -> void:
 	view.view_player_split_button.show()
-
-func _on_player_split_button_button_down() -> void:
-	view.view_player_split_button.hide()
-	# This will probably have to be refactored for the back card
-	view.view_player_dealer_hand.remove_child(model.dealer_hand[0])
-	view.view_player_dealer_hand.remove_child(model.dealer_hand[1])
-	
-	view.view_player_player_hand.remove_child(model.player_hand[0])
-	view.view_player_player_hand.remove_child(model.player_hand[1])
-	view.view_player.hide()
-	model.split_hand()
-	view.view_player_split.show()
-	# This will probably have to be refactor for the back card
-	view.view_player_split_dealer_hand.add_child(model.dealer_hand[0])
-	view.view_player_split_dealer_hand.add_child(model.dealer_hand[1])
-	view.view_player_split_hand_1.add_child(model.player_hand[0])
-	view.view_player_split_hand_2.add_child(model.player_hand_split[0])
-	view.view_player_split_hand_1.add_child(model.player_hand[model.draw_card(model.player_hand)])
-	view.view_player_split_hand_1.add_child(model.player_hand_split[model.draw_card(model.player_hand_split)])
-	
 
 func _on_player_hit_button_down() -> void:
 	view.view_player_split_button.hide()
@@ -86,28 +68,67 @@ func _on_player_hit_button_down() -> void:
 	
 func _on_model_hit_update() -> void:
 	view.view_player_hit_button.hide()
+	view.view_player_split_hit_button_1.hide()
 
 func _on_player_confirm_button_down() -> void:
 	view.view_player_split_button.hide()
 	view.view_player.hide()
-	view.view_dealer.show()
+	dealer_turn()
 
 #endregion
 
 #region View Player Split
 
+func _on_player_split_button_button_down() -> void:
+	view.view_player_split_button.hide()
+	# This will probably have to be refactored for the back card
+	view.view_player_dealer_hand.remove_child(model.dealer_hand[0])
+	view.view_player_dealer_hand.remove_child(model.dealer_hand[1])
+	view.view_player_player_hand.remove_child(model.player_hand[0])
+	view.view_player_player_hand.remove_child(model.player_hand[1])
+	view.view_player.hide()
+	model.split_hand()
+	view.view_player_split_bet_label.text = str("Aposta: " + str(model.confirmed_bet))
+	view.view_player_split_hit_button_1.show()
+	view.view_player_split.show()
+	# This will probably have to be refactor for the back card
+	view.view_player_split_dealer_hand.add_child(model.dealer_hand[0])
+	view.view_player_split_dealer_hand.add_child(model.dealer_hand[1])
+	view.view_player_split_hand_1.add_child(model.player_hand[0])
+	view.view_player_split_hand_2.add_child(model.player_hand_split[0])
+	view.view_player_split_hand_1.add_child(model.player_hand[model.draw_card(model.player_hand)])
+	view.view_player_split_hand_1.add_child(model.player_hand_split[model.draw_card(model.player_hand_split)])
+
 # Botão Comprar
 func _on_split_hit_button_1_button_down() -> void:
-	pass # Replace with function body.
+	view.view_player_split_hand_1.add_child(model.player_hand[model.draw_card(model.player_hand)])
+	# Calls a function in the model that emits a signal to update the view
 
 func _on_split_hit_button_2_button_down() -> void:
-	pass # Replace with function body.
-	
+	view.view_player_split_hand_2.add_child(model.player_hand_split[model.draw_card(model.player_hand_split)])
+	# Calls a function in the model that emits a signal to update the view
+
+func _on_model_hit_split_update() -> void:
+	view.view_player_split_hit_button_2.hide()
+
 # Botão confirmar
 func _on_split_confirm_button_button_down() -> void:
-	pass # Replace with function body.
+	view.view_player_split.hide()
+	dealer_turn()
+	
+
 #endregion
 
 #region View Dealer
-
+func dealer_turn():
+	view.view_dealer.show()
+	model.dealer_turn()
+	view.view_dealer_player_score.text = "Pontos player: " + str(model.player_hand_score)
+	view.view_dealer_score.text = "Pontos dealer: " + str(model.dealer_hand_score)
+	view.view_dealer_bet.text = "Aposta: " + str(model.confirmed_bet)
+	view.view_dealer_bank.text = "Banco: " + str(model.bank)
+	
+	
+	
+	
 #endregion
