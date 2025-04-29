@@ -50,8 +50,9 @@ func show_view_player():
 	view.view_player_player_hand.add_child(model.player_hand[model.draw_card(model.player_hand)])
 	model.evaluate_hand()
 	view.view_player_dealer_hand.add_child(model.dealer_hand[model.draw_card(model.dealer_hand)])
+	model.draw_card(model.dealer_hand)
 	# Replace this with back card. Add place holder back card and draw the second one on dealer turn.
-	view.view_player_dealer_hand.add_child(model.dealer_hand[model.draw_card(model.dealer_hand)])
+	view.view_player_dealer_hand.add_child(model.back_card)
 
 func _on_model_score_update() -> void:
 	view.view_player_score_label.text = "Pontos: " + str(model.player_hand_score)
@@ -73,6 +74,8 @@ func _on_model_hit_update() -> void:
 func _on_player_confirm_button_down() -> void:
 	view.view_player_split_button.hide()
 	view.view_player.hide()
+	view.view_player_player_hand.reparent(view.view_dealer_player_container)
+	view.view_player_dealer_hand.reparent(view.view_dealer_dealer_container)
 	dealer_turn()
 
 #endregion
@@ -123,6 +126,10 @@ func _on_split_confirm_button_button_down() -> void:
 func dealer_turn():
 	view.view_dealer.show()
 	model.dealer_turn()
+	# Remove back card 
+	view.view_player_dealer_hand.remove_child(model.back_card)
+	for card in range(1, model.dealer_hand.size(), 1):
+		view.view_player_dealer_hand.add_child(model.dealer_hand[card])
 	view.view_dealer_player_score.text = "Pontos player: " + str(model.player_hand_score)
 	view.view_dealer_score.text = "Pontos dealer: " + str(model.dealer_hand_score)
 	view.view_dealer_bet.text = "Aposta: " + str(model.confirmed_bet)

@@ -14,6 +14,7 @@ var bet: int = 1
 var confirmed_bet: int
 
 var deck: Array
+var back_card: TextureRect = TextureRect.new()
 
 var same_card_rank: bool = false
 var player_split: bool = false
@@ -34,6 +35,7 @@ func load_deck() -> void:
 
 func _ready():
 	load_deck()
+	back_card.texture = load("res://assets/cards/cardBack0.png")
 
 func return_cards() -> void:
 	if dealer_hand:
@@ -130,6 +132,7 @@ func dealer_turn():
 	# Dealer buys until 17
 	while dealer_hand_score < 17:
 		draw_card(dealer_hand)
+		
 		score_hand(dealer_hand)
 	
 	if dealer_hand_score > 21:

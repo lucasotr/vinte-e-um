@@ -11,7 +11,7 @@ class_name View extends Control
 
 #region View Player
 @onready var view_player: Control = $ViewPlayer
-@onready var view_player_dealer_hand: Control = $ViewPlayer/DealerHand
+@onready var view_player_dealer_hand: HBoxContainer = $ViewPlayer/DealerHand
 @onready var view_player_bet_label: Control = $ViewPlayer/PlayerUI/PlayerDisplay/PlayerLabelBet
 @onready var view_player_score_label: Label = $ViewPlayer/PlayerUI/PlayerDisplay/PlayerLabelScore
 @onready var view_player_player_hand: Control = $ViewPlayer/PlayerUI/HBoxContainer/PlayerHand
@@ -36,11 +36,14 @@ class_name View extends Control
 
 #region View Dealer
 @onready var view_dealer: Control = $ViewDealer
+
+@onready var view_dealer_dealer_container: HBoxContainer  = $ViewDealer/DealerDealerHand
 @onready var view_dealer_player_score: Label = $ViewDealer/DealerScoreContainer/DealerPlayerScore
 @onready var view_dealer_player_split_score: Label = $ViewDealer/DealerScoreContainer/DealerPlayerScore
 @onready var view_dealer_score: Label = $ViewDealer/DealerScoreContainer/DealerDealerScore
 
 @onready var view_dealer_bet: Label = $ViewDealer/HBoxContainer/DealerBetScoreContainer/DealerBetLabel
+@onready var view_dealer_player_container: HBoxContainer = $ViewDealer/HBoxContainer/DealerPlayerHand
 @onready var view_dealer_bank: Label = $ViewDealer/HBoxContainer/DealerBetScoreContainer/DealerBankLabel
 
 #endregion
