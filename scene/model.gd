@@ -128,7 +128,7 @@ func split_hand():
 #region Dealer
 func dealer_turn():
 	# Dealer buys until 17
-	while dealer_hand_score <= 17:
+	while dealer_hand_score < 17:
 		draw_card(dealer_hand)
 		score_hand(dealer_hand)
 	
@@ -143,7 +143,27 @@ func dealer_turn():
 
 func dealer_score():
 	var player_bust: bool = true if player_hand_score > 21 else false
-	var dealer_bust: bool = true if dealer_hand_score > 21 else false	
+	var dealer_bust: bool = true if dealer_hand_score > 21 else false
+	var dealer_win: bool = true if dealer_hand_score > player_hand_score else false
 	
-
+	if player_bust and dealer_bust:
+		bank += confirmed_bet
+		print("Busters! We have a tie!")
+	elif (player_bust == false and dealer_bust == false) and player_hand_score == dealer_hand_score:
+		bank += confirmed_bet
+		print("Push! We have a tie!")
+	elif player_bust == false and dealer_bust == true:
+		bank += confirmed_bet * 2
+		print("Dealer bust! Player wins")
+	elif (player_bust == false and dealer_bust == false) and player_hand_score > dealer_hand_score:
+		bank += confirmed_bet * 2
+		print("Player wins!")
+	elif player_bust == true and dealer_bust == false:
+		print("Player bust! Dealer wins")
+	elif (player_bust == false and dealer_bust == false) and player_hand_score < dealer_hand_score:
+		print("Dealer wins!")
+	confirmed_bet = 0
+	
+	
+	
 #endregion

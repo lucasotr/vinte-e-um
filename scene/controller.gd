@@ -127,8 +127,7 @@ func dealer_turn():
 	view.view_dealer_score.text = "Pontos dealer: " + str(model.dealer_hand_score)
 	view.view_dealer_bet.text = "Aposta: " + str(model.confirmed_bet)
 	view.view_dealer_bank.text = "Banco: " + str(model.bank)
-	
-	
+	model.dealer_score()
 	
 	
 #endregion
