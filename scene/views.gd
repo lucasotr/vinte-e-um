@@ -14,7 +14,8 @@ class_name View extends Control
 @onready var view_player_dealer_hand: HBoxContainer = $ViewPlayer/DealerHand
 @onready var view_player_bet_label: Control = $ViewPlayer/PlayerUI/PlayerDisplay/PlayerLabelBet
 @onready var view_player_score_label: Label = $ViewPlayer/PlayerUI/PlayerDisplay/PlayerLabelScore
-@onready var view_player_player_hand: Control = $ViewPlayer/PlayerUI/HBoxContainer/PlayerHand
+@onready var view_player_player_container: HBoxContainer = $ViewPlayer/PlayerUI/HBoxContainer
+@onready var view_player_player_hand: HBoxContainer = $ViewPlayer/PlayerUI/HBoxContainer/PlayerHand
 @onready var view_player_split_button = $ViewPlayer/PlayerUI/HBoxContainer/PlayerButtons/PlayerSplitButton
 @onready var view_player_hit_button = $ViewPlayer/PlayerUI/HBoxContainer/PlayerButtons/PlayerHitButton
 #endregion

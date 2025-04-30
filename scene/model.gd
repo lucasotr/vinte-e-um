@@ -39,16 +39,26 @@ func _ready():
 
 func return_cards() -> void:
 	if dealer_hand:
+		for card in dealer_hand:
+			card.get_parent().remove_child(card)
 		deck.append_array(dealer_hand)
 		dealer_hand.clear()
+
 	if player_hand: 
+		for card in player_hand:
+			card.get_parent().remove_child(card)
 		deck.append_array(player_hand)
 		player_hand.clear()
+	
 	if player_hand_split:
+		for card in player_hand_split:
+			card.get_parent().remove_child(card)
 		deck.append_array(player_hand_split)
 		player_hand_split.clear()
+		
 	player_split = false
 	same_card_rank = false
+	
 #endregion
 
 #region Bet View

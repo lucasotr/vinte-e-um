@@ -74,7 +74,7 @@ func _on_model_hit_update() -> void:
 func _on_player_confirm_button_down() -> void:
 	view.view_player_split_button.hide()
 	view.view_player.hide()
-	view.view_player_player_hand.reparent(view.view_dealer_player_container)
+	view.view_player_player_hand.reparent(view.view_dealer_player_container, true)
 	view.view_player_dealer_hand.reparent(view.view_dealer_dealer_container)
 	dealer_turn()
 
@@ -118,7 +118,7 @@ func _on_model_hit_split_update() -> void:
 func _on_split_confirm_button_button_down() -> void:
 	view.view_player_split.hide()
 	dealer_turn()
-	
+
 
 #endregion
 
@@ -134,7 +134,18 @@ func dealer_turn():
 	view.view_dealer_score.text = "Pontos dealer: " + str(model.dealer_hand_score)
 	view.view_dealer_bet.text = "Aposta: " + str(model.confirmed_bet)
 	view.view_dealer_bank.text = "Banco: " + str(model.bank)
+	
 	model.dealer_score()
+	model.return_cards()
+	
+	view.view_dealer.hide()
+	
+	view.view_player_player_hand.reparent(view.view_player_player_container, true)
+	view.view_player_player_container.move_child(view.view_player_player_hand, 0)
+	view.view_player_dealer_hand.reparent(view.view_player)
+	view.view_player.move_child(view.view_player_dealer_hand, 0)
+	
+	show_bet_view()
 	
 	
 #endregion
