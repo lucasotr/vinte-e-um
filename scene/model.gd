@@ -55,9 +55,11 @@ func return_cards() -> void:
 			card.get_parent().remove_child(card)
 		deck.append_array(player_hand_split)
 		player_hand_split.clear()
-		
+	
+	
 	player_split = false
 	same_card_rank = false
+	deck.shuffle()
 	
 #endregion
 

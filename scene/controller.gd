@@ -139,7 +139,7 @@ func dealer_turn():
 	model.return_cards()
 	
 	view.view_dealer.hide()
-	
+
 	view.view_player_player_hand.reparent(view.view_player_player_container, true)
 	view.view_player_player_container.move_child(view.view_player_player_hand, 0)
 	view.view_player_dealer_hand.reparent(view.view_player)
