@@ -267,7 +267,6 @@ layout_mode = 2
 text = "Confirmar"
 
 [node name="ViewDealer" type="Control" parent="Views"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -311,16 +310,16 @@ grow_vertical = 2
 
 [node name="DealerPlayerScore" type="Label" parent="Views/ViewDealer/DealerScoreContainer"]
 layout_mode = 2
-text = "Pontos: "
+text = "Mão 1: "
 
 [node name="DealerPlayerSplitScore" type="Label" parent="Views/ViewDealer/DealerScoreContainer"]
 visible = false
 layout_mode = 2
-text = "Pontos: "
+text = "Mão 2: "
 
 [node name="DealerDealerScore" type="Label" parent="Views/ViewDealer/DealerScoreContainer"]
 layout_mode = 2
-text = "Pontos: "
+text = "Dealer: "
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Views/ViewDealer"]
 layout_mode = 1
@@ -336,6 +335,9 @@ grow_horizontal = 2
 grow_vertical = 0
 
 [node name="DealerPlayerHand" type="HBoxContainer" parent="Views/ViewDealer/HBoxContainer"]
+layout_mode = 2
+
+[node name="DealerPlayerHandSplit" type="HBoxContainer" parent="Views/ViewDealer/HBoxContainer"]
 layout_mode = 2
 
 [node name="DealerBetScoreContainer" type="VBoxContainer" parent="Views/ViewDealer/HBoxContainer"]

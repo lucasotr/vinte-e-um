@@ -73,9 +73,7 @@ func _on_model_hit_update() -> void:
 
 func _on_player_confirm_button_down() -> void:
 	view.view_player_split_button.hide()
-	view.view_player.hide()
-	view.view_player_player_hand.reparent(view.view_dealer_player_container, true)
-	view.view_player_dealer_hand.reparent(view.view_dealer_dealer_container)
+	view.view_player.hide()	
 	dealer_turn()
 
 #endregion
@@ -84,23 +82,31 @@ func _on_player_confirm_button_down() -> void:
 
 func _on_player_split_button_button_down() -> void:
 	view.view_player_split_button.hide()
-	# This will probably have to be refactored for the back card
-	view.view_player_dealer_hand.remove_child(model.dealer_hand[0])
-	view.view_player_dealer_hand.remove_child(model.dealer_hand[1])
-	view.view_player_player_hand.remove_child(model.player_hand[0])
-	view.view_player_player_hand.remove_child(model.player_hand[1])
 	view.view_player.hide()
+	
+	# Move dealer hand to view.view_player_split_dealer_hand
+	view.view_player_dealer_hand.reparent(view.view_player_split_dealer_hand)
+	
 	model.split_hand()
+	
+	# Move player hand to view.view_player_split_hand_1
+	view.view_player_player_hand.reparent(view.view_player_split_hand_1)
+	
+	# Remove second card from player hand
+	model.player_hand_split[0].reparent(view.view_player_split_hand_2)
+	
+	# Draw card player hand
+	view.view_player_player_hand.add_child(model.player_hand[model.draw_card(model.player_hand)])
+	
+	# Draw card split hand
+	view.view_player_split_hand_2.add_child(model.player_hand_split[model.draw_card(model.player_hand_split)])
+	
+	
 	view.view_player_split_bet_label.text = str("Aposta: " + str(model.confirmed_bet))
+	
 	view.view_player_split_hit_button_1.show()
 	view.view_player_split.show()
-	# This will probably have to be refactor for the back card
-	view.view_player_split_dealer_hand.add_child(model.dealer_hand[0])
-	view.view_player_split_dealer_hand.add_child(model.dealer_hand[1])
-	view.view_player_split_hand_1.add_child(model.player_hand[0])
-	view.view_player_split_hand_2.add_child(model.player_hand_split[0])
-	view.view_player_split_hand_1.add_child(model.player_hand[model.draw_card(model.player_hand)])
-	view.view_player_split_hand_1.add_child(model.player_hand_split[model.draw_card(model.player_hand_split)])
+	
 
 # Botão Comprar
 func _on_split_hit_button_1_button_down() -> void:
@@ -124,7 +130,17 @@ func _on_split_confirm_button_button_down() -> void:
 
 #region View Dealer
 func dealer_turn():
+	
+	view.view_player_player_hand.reparent(view.view_dealer_player_container, true)
+	view.view_player_dealer_hand.reparent(view.view_dealer_dealer_container)
+	
+	if model.player_split:
+		view.view_dealer_player_split_score.show()
+		view.view_player_split_hand_2.reparent(view.view_dealer_player_hand_split)
+		# Isto quebra o split view: após o return_cards() reparent para o split_view
+	
 	view.view_dealer.show()
+	
 	model.dealer_turn()
 	# Remove back card 
 	view.view_player_dealer_hand.remove_child(model.back_card)
