@@ -256,6 +256,7 @@ text = "Pontos"
 layout_mode = 2
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="Views/ViewPlayerSplit/SplitPlayerUI"]
+custom_minimum_size = Vector2(0, 190)
 layout_mode = 2
 
 [node name="SplitBetLabel" type="Label" parent="Views/ViewPlayerSplit/SplitPlayerUI/VBoxContainer3"]
@@ -267,6 +268,7 @@ layout_mode = 2
 text = "Confirmar"
 
 [node name="ViewDealer" type="Control" parent="Views"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

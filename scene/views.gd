@@ -27,7 +27,7 @@ class_name View extends Control
 @onready var view_player_split_hit_button_1: Button = $ViewPlayerSplit/SplitPlayerUI/VBoxContainer/HBoxContainer/SplitHitButton1
 @onready var view_player_split_score_label_1: Label = $ViewPlayerSplit/SplitPlayerUI/VBoxContainer/HBoxContainer/SplitScoreLabel1
 @onready var view_player_split_hand_1: HBoxContainer = $ViewPlayerSplit/SplitPlayerUI/VBoxContainer/SplitHand1
-
+@onready var view_player_split_container: VBoxContainer = $ViewPlayerSplit/SplitPlayerUI/VBoxContainer2
 @onready var view_player_split_hit_button_2: Button = $ViewPlayerSplit/SplitPlayerUI/VBoxContainer2/HBoxContainer/SplitHitButton2
 @onready var view_player_split_score_label_2: Label = $ViewPlayerSplit/SplitPlayerUI/VBoxContainer2/HBoxContainer/SplitScoreLabel2
 @onready var view_player_split_hand_2: HBoxContainer = $ViewPlayerSplit/SplitPlayerUI/VBoxContainer2/SplitHand2

@@ -137,13 +137,15 @@ func dealer_turn():
 	if model.player_split:
 		view.view_dealer_player_split_score.show()
 		view.view_player_split_hand_2.reparent(view.view_dealer_player_hand_split)
-		# Isto quebra o split view: após o return_cards() reparent para o split_view
+	else:
+		view.view_dealer_player_split_score.hide()
 	
 	view.view_dealer.show()
 	
 	model.dealer_turn()
-	# Remove back card 
+	# Back card turn
 	view.view_player_dealer_hand.remove_child(model.back_card)
+	
 	for card in range(1, model.dealer_hand.size(), 1):
 		view.view_player_dealer_hand.add_child(model.dealer_hand[card])
 	view.view_dealer_player_score.text = "Pontos player: " + str(model.player_hand_score)
@@ -155,8 +157,10 @@ func dealer_turn():
 	model.return_cards()
 	
 	view.view_dealer.hide()
-
-	view.view_player_player_hand.reparent(view.view_player_player_container, true)
+	
+	view.view_player_split_hand_2.reparent(view.view_player_split_container)
+	view.view_player_player_hand.reparent(view.view_player_player_container)
+	
 	view.view_player_player_container.move_child(view.view_player_player_hand, 0)
 	view.view_player_dealer_hand.reparent(view.view_player)
 	view.view_player.move_child(view.view_player_dealer_hand, 0)
