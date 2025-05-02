@@ -39,13 +39,14 @@ class_name View extends Control
 @onready var view_dealer: Control = $ViewDealer
 
 @onready var view_dealer_dealer_container: HBoxContainer  = $ViewDealer/DealerDealerHand
+
 @onready var view_dealer_player_score: Label = $ViewDealer/DealerScoreContainer/DealerPlayerScore
 @onready var view_dealer_player_split_score: Label = $ViewDealer/DealerScoreContainer/DealerPlayerScore
 @onready var view_dealer_score: Label = $ViewDealer/DealerScoreContainer/DealerDealerScore
 
+
 @onready var view_dealer_bet: Label = $ViewDealer/HBoxContainer/DealerBetScoreContainer/DealerBetLabel
-@onready var view_dealer_player_container: HBoxContainer = $ViewDealer/HBoxContainer/DealerPlayerHand
-@onready var view_dealer_player_hand_split: HBoxContainer = $ViewDealer/HBoxContainer/DealerPlayerHandSplit
 @onready var view_dealer_bank: Label = $ViewDealer/HBoxContainer/DealerBetScoreContainer/DealerBankLabel
+@onready var view_dealer_player_container: HBoxContainer = $ViewDealer/HBoxContainer
 
 #endregion

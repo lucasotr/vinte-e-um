@@ -44,15 +44,18 @@ func _on_bet_confirm_button_down() -> void:
 
 #region View Player
 func show_view_player():
+	view.view_player_hit_button.show()
 	view.view_player.show()
 	view.view_player_bet_label.text = "Aposta: " + str(model.confirmed_bet)
 	view.view_player_player_hand.add_child(model.player_hand[model.draw_card(model.player_hand)])
 	view.view_player_player_hand.add_child(model.player_hand[model.draw_card(model.player_hand)])
 	model.evaluate_hand()
-	view.view_player_dealer_hand.add_child(model.dealer_hand[model.draw_card(model.dealer_hand)])
-	model.draw_card(model.dealer_hand)
+	_on_model_dealer_draw()
 	# Replace this with back card. Add place holder back card and draw the second one on dealer turn.
 	view.view_player_dealer_hand.add_child(model.back_card)
+
+func _on_model_dealer_draw() -> void:
+	view.view_player_dealer_hand.add_child(model.dealer_hand[model.draw_card(model.dealer_hand)])
 
 func _on_model_score_update() -> void:
 	view.view_player_score_label.text = "Pontos: " + str(model.player_hand_score)
@@ -73,7 +76,7 @@ func _on_model_hit_update() -> void:
 
 func _on_player_confirm_button_down() -> void:
 	view.view_player_split_button.hide()
-	view.view_player.hide()	
+	view.view_player.hide()
 	dealer_turn()
 
 #endregion
@@ -131,41 +134,41 @@ func _on_split_confirm_button_button_down() -> void:
 #region View Dealer
 func dealer_turn():
 	
-	view.view_player_player_hand.reparent(view.view_dealer_player_container, true)
+	view.view_player_player_hand.reparent(view.view_dealer_player_container)
+	view.view_dealer_player_container.move_child(view.view_player_player_hand, 0)
 	view.view_player_dealer_hand.reparent(view.view_dealer_dealer_container)
-	
-	if model.player_split:
-		view.view_dealer_player_split_score.show()
-		view.view_player_split_hand_2.reparent(view.view_dealer_player_hand_split)
-	else:
-		view.view_dealer_player_split_score.hide()
 	
 	view.view_dealer.show()
 	
+	if model.player_split:
+		view.view_dealer_player_split_score.show()
+		view.view_player_split_hand_2.reparent(view.view_dealer_player_container)
+		view.view_dealer_player_container.move_child(view.view_player_split_hand_2, 1)
+	else:
+		view.view_dealer_player_split_score.hide()
+	
+	
+	view.view_player_dealer_hand.remove_child(model.back_card)
 	model.dealer_turn()
 	# Back card turn
-	view.view_player_dealer_hand.remove_child(model.back_card)
 	
-	for card in range(1, model.dealer_hand.size(), 1):
-		view.view_player_dealer_hand.add_child(model.dealer_hand[card])
+	
 	view.view_dealer_player_score.text = "Pontos player: " + str(model.player_hand_score)
 	view.view_dealer_score.text = "Pontos dealer: " + str(model.dealer_hand_score)
 	view.view_dealer_bet.text = "Aposta: " + str(model.confirmed_bet)
 	view.view_dealer_bank.text = "Banco: " + str(model.bank)
 	
 	model.dealer_score()
-	model.return_cards()
-	
-	view.view_dealer.hide()
-	
-	view.view_player_split_hand_2.reparent(view.view_player_split_container)
-	view.view_player_player_hand.reparent(view.view_player_player_container)
-	
-	view.view_player_player_container.move_child(view.view_player_player_hand, 0)
-	view.view_player_dealer_hand.reparent(view.view_player)
-	view.view_player.move_child(view.view_player_dealer_hand, 0)
-	
-	show_bet_view()
+	#model.return_cards()
+	#
+	#
+	#view.view_player_split_hand_2.reparent(view.view_player_split_container)
+	#view.view_player_player_hand.reparent(view.view_player_player_container)
+	#view.view_player_player_container.move_child(view.view_player_player_hand, 0)
+	#view.view_player_dealer_hand.reparent(view.view_player)
+	#view.view_player.move_child(view.view_player_dealer_hand, 0)
+	#view.view_dealer.hide()
+	#show_bet_view()
 	
 	
 #endregion

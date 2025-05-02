@@ -6,7 +6,7 @@ signal score_update
 signal split_update
 signal hit_update
 signal hit_split_update
-
+signal dealer_draw
 
 #region Game Start / Game End
 var bank: int = 25
@@ -143,8 +143,7 @@ func split_hand():
 func dealer_turn():
 	# Dealer buys until 17
 	while dealer_hand_score < 17:
-		draw_card(dealer_hand)
-		
+		dealer_draw.emit()
 		score_hand(dealer_hand)
 	
 	if dealer_hand_score > 21:
