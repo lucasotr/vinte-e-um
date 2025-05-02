@@ -159,16 +159,15 @@ func dealer_turn():
 	view.view_dealer_bank.text = "Banco: " + str(model.bank)
 	
 	model.dealer_score()
-	#model.return_cards()
-	#
-	#
-	#view.view_player_split_hand_2.reparent(view.view_player_split_container)
-	#view.view_player_player_hand.reparent(view.view_player_player_container)
-	#view.view_player_player_container.move_child(view.view_player_player_hand, 0)
-	#view.view_player_dealer_hand.reparent(view.view_player)
-	#view.view_player.move_child(view.view_player_dealer_hand, 0)
-	#view.view_dealer.hide()
-	#show_bet_view()
+	model.return_cards()
+	
+	view.view_player_split_hand_2.reparent(view.view_player_split_container)
+	view.view_player_player_hand.reparent(view.view_player_player_container)
+	view.view_player_player_container.move_child(view.view_player_player_hand, 0)
+	view.view_player_dealer_hand.reparent(view.view_player)
+	view.view_player.move_child(view.view_player_dealer_hand, 0)
+	view.view_dealer.hide()
+	show_bet_view()
 	
 	
 #endregion
