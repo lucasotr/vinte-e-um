@@ -142,22 +142,24 @@ func dealer_turn():
 	view.view_dealer.show()
 	
 	if model.player_split:
+		view.view_dealer_player_split_score.text = "Pontos mão 2 do Jogador: " + str(model.player_hand_split_score)
 		view.view_dealer_player_split_score.show()
 		view.view_player_split_hand_2.reparent(view.view_dealer_player_container)
 		view.view_dealer_player_container.move_child(view.view_player_split_hand_2, 1)
 	else:
 		view.view_dealer_player_split_score.hide()
 	
-	
 	view.view_player_dealer_hand.remove_child(model.back_card)
 	model.dealer_turn()
 	# Back card turn
 
-	view.view_dealer_player_score.text = "Pontos player: " + str(model.player_hand_score)
+	view.view_dealer_player_score.text = "Pontos mão 1 do Jogador: " + str(model.player_hand_score)
 	view.view_dealer_score.text = "Pontos dealer: " + str(model.dealer_hand_score)
 	view.view_dealer_bet.text = "Aposta: " + str(model.confirmed_bet)
 	view.view_dealer_bank.text = "Banco: " + str(model.bank)
-	model.dealer_score()
+	model.dealer_score(model.player_hand_score)
+	model.dealer_score(model.player_hand_split_score)
+	
 	view.view_dealer_timer.start()
 
 	

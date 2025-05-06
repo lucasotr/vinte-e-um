@@ -146,6 +146,9 @@ func dealer_turn():
 		dealer_draw.emit()
 		score_hand(dealer_hand)
 	
+	if player_split:
+		print("This hand is splitted!")
+	
 	if dealer_hand_score > 21:
 		print("Dealer bust: " + str(dealer_hand_score) + " Hand size: " + str(dealer_hand.size()) )
 		for card in dealer_hand:
@@ -155,26 +158,26 @@ func dealer_turn():
 		for card in dealer_hand:
 			print("Card: " +  str(card.value))
 
-func dealer_score():
-	var player_bust: bool = true if player_hand_score > 21 else false
+func dealer_score(hand_score: int):
+	var player_bust: bool = true if hand_score > 21 else false
 	var dealer_bust: bool = true if dealer_hand_score > 21 else false
-	var dealer_win: bool = true if dealer_hand_score > player_hand_score else false
+	var dealer_win: bool = true if dealer_hand_score > hand_score else false
 	
 	if player_bust and dealer_bust:
 		bank += confirmed_bet
 		print("Busters! We have a tie!")
-	elif (player_bust == false and dealer_bust == false) and player_hand_score == dealer_hand_score:
+	elif (player_bust == false and dealer_bust == false) and hand_score == dealer_hand_score:
 		bank += confirmed_bet
 		print("Push! We have a tie!")
 	elif player_bust == false and dealer_bust == true:
 		bank += confirmed_bet * 2
 		print("Dealer bust! Player wins")
-	elif (player_bust == false and dealer_bust == false) and player_hand_score > dealer_hand_score:
+	elif (player_bust == false and dealer_bust == false) and hand_score > dealer_hand_score:
 		bank += confirmed_bet * 2
 		print("Player wins!")
 	elif player_bust == true and dealer_bust == false:
 		print("Player bust! Dealer wins")
-	elif (player_bust == false and dealer_bust == false) and player_hand_score < dealer_hand_score:
+	elif (player_bust == false and dealer_bust == false) and hand_score < dealer_hand_score:
 		print("Dealer wins!")
 	
 	bank_update.emit()
