@@ -84,8 +84,8 @@ func confirm_bet():
 
 #region View Player
 func draw_card(hand: Array) -> int:
-	#hand.append(Card.new(8, 0))
-	hand.append(deck.pop_back())
+	hand.append(Card.new(8, 0))
+	#hand.append(deck.pop_back())
 	score_hand(hand)
 	return hand.size() - 1
 
