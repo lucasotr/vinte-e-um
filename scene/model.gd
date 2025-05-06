@@ -148,6 +148,8 @@ func dealer_turn():
 	
 	if player_split:
 		print("This hand is splitted!")
+	else:
+		print("This is a normal hand!")
 	
 	if dealer_hand_score > 21:
 		print("Dealer bust: " + str(dealer_hand_score) + " Hand size: " + str(dealer_hand.size()) )
