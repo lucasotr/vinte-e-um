@@ -48,5 +48,6 @@ class_name View extends Control
 @onready var view_dealer_bet: Label = $ViewDealer/HBoxContainer/DealerBetScoreContainer/DealerBetLabel
 @onready var view_dealer_bank: Label = $ViewDealer/HBoxContainer/DealerBetScoreContainer/DealerBankLabel
 @onready var view_dealer_player_container: HBoxContainer = $ViewDealer/HBoxContainer
+@onready var view_dealer_timer: Timer = $ViewDealer/Timer
 
 #endregion

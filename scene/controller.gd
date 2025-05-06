@@ -31,6 +31,7 @@ func _on_bet_button_down(value: int) -> void:
 
 func _on_model_bank_update() -> void:
 	view.view_bet_label_bank.text = "Banco: " + str(model.bank)
+	view.view_dealer_bank.text =  "Banco: " + str(model.bank)
 
 func _on_model_bet_update() -> void:
 	view.view_bet_label_bet.text = "Aposta: " + str(model.bet)
@@ -151,16 +152,17 @@ func dealer_turn():
 	view.view_player_dealer_hand.remove_child(model.back_card)
 	model.dealer_turn()
 	# Back card turn
-	
-	
+
 	view.view_dealer_player_score.text = "Pontos player: " + str(model.player_hand_score)
 	view.view_dealer_score.text = "Pontos dealer: " + str(model.dealer_hand_score)
 	view.view_dealer_bet.text = "Aposta: " + str(model.confirmed_bet)
 	view.view_dealer_bank.text = "Banco: " + str(model.bank)
-	
 	model.dealer_score()
-	model.return_cards()
+	view.view_dealer_timer.start()
+
 	
+func _on_timer_timeout() -> void:
+	model.return_cards()
 	view.view_player_split_hand_2.reparent(view.view_player_split_container)
 	view.view_player_player_hand.reparent(view.view_player_player_container)
 	view.view_player_player_container.move_child(view.view_player_player_hand, 0)

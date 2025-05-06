@@ -120,13 +120,14 @@ grow_vertical = 2
 
 [node name="DealerHand" type="HBoxContainer" parent="Views/ViewPlayer"]
 layout_mode = 1
-anchors_preset = -1
+anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -66.0
-offset_right = -26.0
+offset_left = -20.0
+offset_right = 20.0
 offset_bottom = 190.0
 grow_horizontal = 2
+alignment = 1
 
 [node name="PlayerUI" type="VBoxContainer" parent="Views/ViewPlayer"]
 layout_mode = 1
@@ -298,7 +299,7 @@ offset_bottom = 190.0
 grow_horizontal = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="DealerScoreContainer" type="HBoxContainer" parent="Views/ViewDealer"]
+[node name="DealerScoreContainer" type="VBoxContainer" parent="Views/ViewDealer"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -308,23 +309,22 @@ anchor_bottom = 0.5
 offset_left = -60.0
 offset_top = -20.0
 offset_right = 60.0
-offset_bottom = 20.0
+offset_bottom = 30.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="DealerPlayerScore" type="Label" parent="Views/ViewDealer/DealerScoreContainer"]
-visible = false
 layout_mode = 2
-text = "Mão 1: "
+text = "Score mão 1 do Player: "
 
 [node name="DealerPlayerSplitScore" type="Label" parent="Views/ViewDealer/DealerScoreContainer"]
 visible = false
 layout_mode = 2
-text = "Mão 2: "
+text = "Score mão 2 do Player: "
 
 [node name="DealerDealerScore" type="Label" parent="Views/ViewDealer/DealerScoreContainer"]
 layout_mode = 2
-text = "Dealer: "
+text = "Pontos do dealer: "
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Views/ViewDealer"]
 layout_mode = 1
@@ -351,6 +351,10 @@ text = "Aposta:"
 layout_mode = 2
 text = "Banco: "
 
+[node name="Timer" type="Timer" parent="Views/ViewDealer"]
+wait_time = 3.0
+one_shot = true
+
 [node name="Controller" type="Node" parent="."]
 script = ExtResource("3_0sh7j")
 
@@ -372,3 +376,4 @@ script = ExtResource("3_0sh7j")
 [connection signal="button_down" from="Views/ViewPlayerSplit/SplitPlayerUI/VBoxContainer/HBoxContainer/SplitHitButton1" to="Controller" method="_on_split_hit_button_1_button_down"]
 [connection signal="button_down" from="Views/ViewPlayerSplit/SplitPlayerUI/VBoxContainer2/HBoxContainer/SplitHitButton2" to="Controller" method="_on_split_hit_button_2_button_down"]
 [connection signal="button_down" from="Views/ViewPlayerSplit/SplitPlayerUI/VBoxContainer3/SplitConfirmButton" to="Controller" method="_on_split_confirm_button_button_down"]
+[connection signal="timeout" from="Views/ViewDealer/Timer" to="Controller" method="_on_timer_timeout"]

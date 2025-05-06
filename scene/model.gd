@@ -84,8 +84,8 @@ func confirm_bet():
 
 #region View Player
 func draw_card(hand: Array) -> int:
-	hand.append(Card.new(8, 0))
-	#hand.append(deck.pop_back())
+	#hand.append(Card.new(8, 0))
+	hand.append(deck.pop_back())
 	score_hand(hand)
 	return hand.size() - 1
 
@@ -176,6 +176,8 @@ func dealer_score():
 		print("Player bust! Dealer wins")
 	elif (player_bust == false and dealer_bust == false) and player_hand_score < dealer_hand_score:
 		print("Dealer wins!")
+	
+	bank_update.emit()
 	confirmed_bet = 0
 	
 	
