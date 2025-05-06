@@ -157,8 +157,8 @@ func dealer_turn():
 	view.view_dealer_score.text = "Pontos dealer: " + str(model.dealer_hand_score)
 	
 	if model.player_split: 
-		model.dealer_score(model.player_hand_score)
-	model.dealer_score(model.player_hand_split_score)
+		model.dealer_score(model.player_hand_split_score)
+	model.dealer_score(model.player_hand_score)
 	
 	view.view_dealer_timer.start()
 

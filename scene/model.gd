@@ -84,8 +84,8 @@ func confirm_bet():
 
 #region View Player
 func draw_card(hand: Array) -> int:
-	hand.append(Card.new(8, 0))
-	#hand.append(deck.pop_back())
+	#hand.append(Card.new(8, 0))
+	hand.append(deck.pop_back())
 	score_hand(hand)
 	return hand.size() - 1
 
@@ -164,7 +164,7 @@ func dealer_score(hand_score: int):
 	var player_bust: bool = true if hand_score > 21 else false
 	var dealer_bust: bool = true if dealer_hand_score > 21 else false
 	var dealer_win: bool = true if dealer_hand_score > hand_score else false
-	
+	print("Player hand score " + str(hand_score))
 	if player_bust and dealer_bust:
 		bank += confirmed_bet
 		print("Busters! We have a tie!")
