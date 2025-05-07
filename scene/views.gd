@@ -2,6 +2,15 @@ class_name View extends Control
 
 # Maximum card draw is 11, layout should reflect that
 
+#region Menu
+
+@onready var menu: Control = $"../Menu"
+
+
+
+#endregion
+
+
 #region View Bet
 @onready var view_bet: Control = $ViewBet
 @onready var view_bet_label_bet: Label = $ViewBet/VBoxBetContainer/HBoxBetDisplayContainer/BetLabelBet

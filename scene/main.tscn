@@ -1,22 +1,57 @@
-[gd_scene load_steps=4 format=3 uid="uid://ctrdsct0qbj31"]
+[gd_scene load_steps=5 format=3 uid="uid://ctrdsct0qbj31"]
 
 [ext_resource type="Script" path="res://scene/model.gd" id="1_7ob6b"]
 [ext_resource type="Script" path="res://scene/views.gd" id="2_d1ytg"]
 [ext_resource type="Script" path="res://scene/controller.gd" id="3_0sh7j"]
 
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_oll0a"]
+
 [node name="main" type="Node"]
 
 [node name="Menu" type="Control" parent="."]
-visible = false
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Menu"]
+custom_minimum_size = Vector2(230, 230)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.0
+offset_top = -115.0
+offset_right = 115.0
+offset_bottom = 115.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("PlaceholderTexture2D_oll0a")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu"]
+layout_mode = 0
+offset_left = 527.0
+offset_top = 491.0
+offset_right = 613.0
+offset_bottom = 557.0
+
+[node name="MenuNewGameButton" type="Button" parent="Menu/VBoxContainer"]
+layout_mode = 2
+text = "Novo jogo"
+
+[node name="MenuExitGameButton" type="Button" parent="Menu/VBoxContainer"]
+layout_mode = 2
+text = "Sair"
 
 [node name="Model" type="Node" parent="."]
 script = ExtResource("1_7ob6b")
 
 [node name="Views" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -358,6 +393,7 @@ one_shot = true
 [node name="Controller" type="Node" parent="."]
 script = ExtResource("3_0sh7j")
 
+[connection signal="button_down" from="Menu/VBoxContainer/MenuNewGameButton" to="Controller" method="_on_new_game_button_down"]
 [connection signal="bank_update" from="Model" to="Controller" method="_on_model_bank_update"]
 [connection signal="bet_update" from="Model" to="Controller" method="_on_model_bet_update"]
 [connection signal="dealer_draw" from="Model" to="Controller" method="_on_model_dealer_draw"]

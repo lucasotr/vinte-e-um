@@ -4,14 +4,17 @@ class_name Controller extends Node
 @onready var view: View = $"../Views"
 @onready var menu: Control = $"../Menu"
 
+#region Menu
+
+func _on_new_game_button_down() -> void:
+	view.menu.hide()
+	view.show()
+	show_bet_view()
+#endregion
 
 #region View Bet
-func _ready():
-# _ready is place holder, the menu should call show_bet_view() directly
-	show_bet_view()
-
 func show_menu():
-	menu.show()
+	view.menu.show()
 
 func show_bet_view():
 	view.view_bet_label_bet.text = "Aposta: " + str(model.bet)
@@ -128,8 +131,6 @@ func _on_model_hit_split_update() -> void:
 func _on_split_confirm_button_button_down() -> void:
 	view.view_player_split.hide()
 	dealer_turn()
-
-
 #endregion
 
 #region View Dealer
@@ -171,7 +172,5 @@ func _on_timer_timeout() -> void:
 	view.view_player_dealer_hand.reparent(view.view_player)
 	view.view_player.move_child(view.view_player_dealer_hand, 0)
 	view.view_dealer.hide()
-	show_bet_view()
-	
-	
+	show_bet_view()	
 #endregion
