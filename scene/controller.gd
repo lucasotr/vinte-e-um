@@ -31,7 +31,6 @@ func _on_model_bet_update() -> void:
 func _on_bet_confirm_button_down() -> void:
 	model.confirm_bet()
 	view.view_bet.hide()
-	
 	show_view_player()
 
 #endregion
@@ -120,27 +119,22 @@ func _on_split_confirm_button_button_down() -> void:
 
 #region View Dealer
 func dealer_turn():
-	view.view_player_player_hand.reparent(view.view_dealer_player_container)
-	view.view_dealer_player_container.move_child(view.view_player_player_hand, 0)
-	view.view_player_dealer_hand.reparent(view.view_dealer_dealer_container)
 	
-	view.view_dealer_bet.text = "Aposta: " + str(model.confirmed_bet)
-	view.view_dealer_bank.text = "Banco: " + str(model.bank)
+	_on_model_bet_update()
 	
 	if model.player_split:
-		view.view_dealer_player_split_score.text = "Pontos mão 2 do Jogador: " + str(model.player_hand_split_score)
-		view.view_dealer_player_split_score.show()
-		view.view_player_split_hand_2.reparent(view.view_dealer_player_container)
-		view.view_dealer_player_container.move_child(view.view_player_split_hand_2, 1)
+		view.show_view_dealer_split(model.player_hand_split_score)
 	else:
 		view.view_dealer_player_split_score.hide()
 	
-	view.view_dealer.show()
+	view.show_view_dealer()
+	#view.view_dealer.show()
+	view.update_score(model.player_hand_score, model.player_hand_score, model.player_hand_split_score)
 	
-	view.view_dealer_player_score.text = "Pontos mão 1 do Jogador: " + str(model.player_hand_score)
 	view.view_player_dealer_hand.remove_child(model.back_card)
 	model.dealer_turn()
-	view.view_dealer_score.text = "Pontos dealer: " + str(model.dealer_hand_score)
+	
+	#view.view_dealer_score.text = "Pontos dealer: " + str(model.dealer_hand_score)
 	
 	if model.player_split: 
 		model.dealer_score(model.player_hand_split_score)
@@ -151,12 +145,7 @@ func dealer_turn():
 	
 func _on_timer_timeout() -> void:
 	model.return_cards()
-	view.view_player_split_hand_2.reparent(view.view_player_split_container)
-	view.view_player_player_hand.reparent(view.view_player_player_container)
-	view.view_player_player_container.move_child(view.view_player_player_hand, 0)
-	view.view_player_dealer_hand.reparent(view.view_player)
-	view.view_player.move_child(view.view_player_dealer_hand, 0)
-	view.view_dealer.hide()
+	view.view_dealer_restart()
 	view.update_bet_view(model.bet, model.bank)
-	view.view_bet.show()
+	view.show_view_bet()
 #endregion

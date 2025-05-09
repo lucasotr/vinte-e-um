@@ -10,7 +10,8 @@ func new_game(bet: int, bank: int):
 	menu.hide()
 	show()
 	update_bet_view(bet, bank)
-	view_bet.show()
+	show_view_bet()
+	
 #endregion
 
 #region View Bet
@@ -18,6 +19,12 @@ func new_game(bet: int, bank: int):
 @onready var view_bet_label_bet: Label = $ViewBet/VBoxBetContainer/HBoxBetDisplayContainer/BetLabelBet
 @onready var view_bet_label_bank: Label = $ViewBet/VBoxBetContainer/HBoxBetDisplayContainer/BetLabelBank
 @onready var view_bet_add_button: Button = $ViewBet/VBoxBetContainer/HBoxBetContainer/BetAddButton
+@onready var view_bet_display_container: HBoxContainer = $ViewBet/VBoxBetContainer/HBoxBetDisplayContainer
+
+func show_view_bet():
+	view_bet_label_bet.reparent(view_bet_display_container)
+	view_bet_display_container.move_child(view_bet_label_bet, 0)
+	view_bet.show()
 
 func update_bet_view(bet, bank):
 	view_bet_label_bet.text = "Aposta: " + str(bet)
@@ -28,9 +35,6 @@ func update_add_button(add : bool):
 		view_bet_add_button.text = "Adicionar"
 	else:
 		view_bet_add_button.text = "Subtrair"
-
-
-
 #endregion
 
 #region View Player
@@ -46,6 +50,7 @@ func update_add_button(add : bool):
 func show_view_player():
 	view_player_hit_button.show()
 	view_player.show()
+	
 	view_bet_label_bet.reparent(view_player_displayer)
 	view_player_displayer.move_child(view_bet_label_bet, 0)
 
@@ -80,15 +85,33 @@ func update_score(score: int, split_1: int, split_2:int):
 #region View Dealer
 @onready var view_dealer: Control = $ViewDealer
 @onready var view_dealer_dealer_container: HBoxContainer  = $ViewDealer/DealerDealerHand
-@onready var view_dealer_player_score: Label = $ViewDealer/DealerScoreContainer/DealerPlayerScore
-@onready var view_dealer_player_split_score: Label = $ViewDealer/DealerScoreContainer/DealerPlayerSplitScore
-@onready var view_dealer_score: Label = $ViewDealer/DealerScoreContainer/DealerDealerScore
-@onready var view_dealer_bet: Label = $ViewDealer/HBoxContainer/DealerBetScoreContainer/DealerBetLabel
-@onready var view_dealer_bank: Label = $ViewDealer/HBoxContainer/DealerBetScoreContainer/DealerBankLabel
-@onready var view_dealer_player_container: HBoxContainer = $ViewDealer/HBoxContainer
 @onready var view_dealer_timer: Timer = $ViewDealer/Timer
+@onready var view_dealer_score_container: VBoxContainer = $ViewDealer/DealerScoreContainer
+@onready var view_dealer_player_container: HBoxContainer = $ViewDealer/HBoxContainer
+@onready var view_dealer_player_display: VBoxContainer = $ViewDealer/HBoxContainer/DealerBetScoreContainer
+@onready var view_dealer_score: Label = $ViewDealer/DealerScoreContainer/DealerDealerScore
 
 
+func show_view_dealer():
+	view_player_score_label.reparent(view_dealer_score_container)
+	view_bet_label_bank.reparent(view_dealer_player_display)
+	view_bet_label_bet.reparent(view_dealer_player_display)
+	view_dealer_player_display.move_child(view_bet_label_bet, 0)
+	
+	view_player_player_hand.reparent(view_dealer_player_container)
+	view_dealer_player_container.move_child(view_player_player_hand, 0)
+	view_player_dealer_hand.reparent(view_dealer_dealer_container)
+	view_dealer.show()
 
+func show_view_dealer_split(split_score: int):
+	view_player_split_hand_2.reparent(view_dealer_player_container)
+	view_dealer_player_container.move_child(view_player_split_hand_2, 0)
 
+func view_dealer_restart():
+	view_dealer.hide()
+	view_player_player_hand.reparent(view_player_player_container)
+	view_player_split_hand_2.reparent(view_player_split_container)
+	view_player_player_container.move_child(view_player_player_hand, 0)
+	view_player_dealer_hand.reparent(view_player)
+	view_player.move_child(view_player_dealer_hand, 0)
 #endregion

@@ -348,18 +348,8 @@ offset_bottom = 30.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="DealerPlayerScore" type="Label" parent="Views/ViewDealer/DealerScoreContainer"]
-layout_mode = 2
-text = "Score mão 1 do Player: "
-
-[node name="DealerPlayerSplitScore" type="Label" parent="Views/ViewDealer/DealerScoreContainer"]
-visible = false
-layout_mode = 2
-text = "Score mão 2 do Player: "
-
 [node name="DealerDealerScore" type="Label" parent="Views/ViewDealer/DealerScoreContainer"]
 layout_mode = 2
-text = "Pontos do dealer: "
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Views/ViewDealer"]
 layout_mode = 1
@@ -378,14 +368,6 @@ grow_vertical = 0
 [node name="DealerBetScoreContainer" type="VBoxContainer" parent="Views/ViewDealer/HBoxContainer"]
 custom_minimum_size = Vector2(0, 190)
 layout_mode = 2
-
-[node name="DealerBetLabel" type="Label" parent="Views/ViewDealer/HBoxContainer/DealerBetScoreContainer"]
-layout_mode = 2
-text = "Aposta:"
-
-[node name="DealerBankLabel" type="Label" parent="Views/ViewDealer/HBoxContainer/DealerBetScoreContainer"]
-layout_mode = 2
-text = "Banco: "
 
 [node name="Timer" type="Timer" parent="Views/ViewDealer"]
 wait_time = 3.0
