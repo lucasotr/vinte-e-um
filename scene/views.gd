@@ -6,27 +6,60 @@ class_name View extends Control
 
 @onready var menu: Control = $"../Menu"
 
-
-
+func new_game(bet: int, bank: int):
+	menu.hide()
+	show()
+	update_bet_view(bet, bank)
+	view_bet.show()
 #endregion
-
 
 #region View Bet
 @onready var view_bet: Control = $ViewBet
 @onready var view_bet_label_bet: Label = $ViewBet/VBoxBetContainer/HBoxBetDisplayContainer/BetLabelBet
 @onready var view_bet_label_bank: Label = $ViewBet/VBoxBetContainer/HBoxBetDisplayContainer/BetLabelBank
 @onready var view_bet_add_button: Button = $ViewBet/VBoxBetContainer/HBoxBetContainer/BetAddButton
+
+func update_bet_view(bet, bank):
+	view_bet_label_bet.text = "Aposta: " + str(bet)
+	view_bet_label_bank.text = "Banco : " + str(bank)
+	
+func update_add_button(add : bool):
+	if add:
+		view_bet_add_button.text = "Adicionar"
+	else:
+		view_bet_add_button.text = "Subtrair"
+
+
+
 #endregion
 
 #region View Player
 @onready var view_player: Control = $ViewPlayer
 @onready var view_player_dealer_hand: HBoxContainer = $ViewPlayer/DealerHand
-@onready var view_player_bet_label: Control = $ViewPlayer/PlayerUI/PlayerDisplay/PlayerLabelBet
+@onready var view_player_displayer: HBoxContainer = $ViewPlayer/PlayerUI/PlayerDisplay
 @onready var view_player_score_label: Label = $ViewPlayer/PlayerUI/PlayerDisplay/PlayerLabelScore
 @onready var view_player_player_container: HBoxContainer = $ViewPlayer/PlayerUI/HBoxContainer
 @onready var view_player_player_hand: HBoxContainer = $ViewPlayer/PlayerUI/HBoxContainer/PlayerHand
 @onready var view_player_split_button = $ViewPlayer/PlayerUI/HBoxContainer/PlayerButtons/PlayerSplitButton
 @onready var view_player_hit_button = $ViewPlayer/PlayerUI/HBoxContainer/PlayerButtons/PlayerHitButton
+
+func show_view_player():
+	view_player_hit_button.show()
+	view_player.show()
+	view_bet_label_bet.reparent(view_player_displayer)
+	view_player_displayer.move_child(view_bet_label_bet, 0)
+
+func player_draw_card(card: Card):
+	view_player_player_hand.add_child(card)
+
+func dealer_draw_card(card: Card):
+	view_player_dealer_hand.add_child(card)
+
+func update_score(score: int, split_1: int, split_2:int):
+	view_player_score_label.text = "Pontos: " + str(score)
+	view_player_split_score_label_1.text = "Pontos: " + str(split_1)
+	view_player_split_score_label_2.text = "Pontos: " + str(split_2)
+
 #endregion
 
 #region View Player Split

@@ -181,11 +181,6 @@ grow_vertical = 0
 layout_mode = 2
 mouse_filter = 2
 
-[node name="PlayerLabelBet" type="Label" parent="Views/ViewPlayer/PlayerUI/PlayerDisplay"]
-layout_mode = 2
-size_flags_horizontal = 6
-text = "Aposta: 1"
-
 [node name="PlayerLabelScore" type="Label" parent="Views/ViewPlayer/PlayerUI/PlayerDisplay"]
 layout_mode = 2
 size_flags_horizontal = 6
@@ -400,7 +395,6 @@ one_shot = true
 script = ExtResource("3_0sh7j")
 
 [connection signal="button_down" from="Menu/VBoxContainer/MenuNewGameButton" to="Controller" method="_on_new_game_button_down"]
-[connection signal="bank_update" from="Model" to="Controller" method="_on_model_bank_update"]
 [connection signal="bet_update" from="Model" to="Controller" method="_on_model_bet_update"]
 [connection signal="dealer_draw" from="Model" to="Controller" method="_on_model_dealer_draw"]
 [connection signal="hit_split_update" from="Model" to="Controller" method="_on_model_hit_split_update"]

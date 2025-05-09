@@ -1,7 +1,6 @@
 class_name Model extends Node
 
 signal bet_update
-signal bank_update
 signal score_update
 signal split_update
 signal hit_update
@@ -77,7 +76,7 @@ func change_bet(value: int):
 func confirm_bet():
 	confirmed_bet = bet
 	bank = bank - bet
-	bank_update.emit()
+	bet_update.emit()
 	bet = 1
 
 #endregion
@@ -182,7 +181,7 @@ func dealer_score(hand_score: int):
 	elif (player_bust == false and dealer_bust == false) and hand_score < dealer_hand_score:
 		print("Dealer wins!")
 	
-	bank_update.emit()
+	bet_update.emit()
 	confirmed_bet = 0
 	
 	
