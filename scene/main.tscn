@@ -9,6 +9,7 @@
 [node name="main" type="Node"]
 
 [node name="Menu" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -51,7 +52,6 @@ text = "Sair"
 script = ExtResource("1_7ob6b")
 
 [node name="Views" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -62,7 +62,6 @@ mouse_filter = 2
 script = ExtResource("2_d1ytg")
 
 [node name="ViewBet" type="Control" parent="Views"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

@@ -72,26 +72,17 @@ func _on_player_confirm_button_down() -> void:
 #region View Player Split
 
 func _on_player_split_button_button_down() -> void:
-	view.view_player_split_button.hide()
-	view.view_player.hide()
-	
-	# Move dealer hand to view.view_player_split_dealer_hand
-	view.view_player_dealer_hand.reparent(view.view_player_split_dealer_hand)
-	
+	view.show_view_split()
 	model.split_hand()
-	
-	# Move player hand to view.view_player_split_hand_1
-	view.view_player_player_hand.reparent(view.view_player_split_hand_1)
 	
 	# Remove second card from player hand
 	model.player_hand_split[0].reparent(view.view_player_split_hand_2)
 	
 	# Draw card player hand
-	view.view_player_player_hand.add_child(model.player_hand[model.draw_card(model.player_hand)])
+	view.player_draw_card(model.player_hand[model.draw_card(model.player_hand)])
 	
 	# Draw card split hand
-	view.view_player_split_hand_2.add_child(model.player_hand_split[model.draw_card(model.player_hand_split)])
-	
+	view.player_split_draw(model.player_hand_split[model.draw_card(model.player_hand_split)])
 	
 	view.view_player_split_bet_label.text = str("Aposta: " + str(model.confirmed_bet))
 	
@@ -99,19 +90,15 @@ func _on_player_split_button_button_down() -> void:
 	view.view_player_split.show()
 	
 
-# Botão Comprar
 func _on_split_hit_button_1_button_down() -> void:
-	view.view_player_split_hand_1.add_child(model.player_hand[model.draw_card(model.player_hand)])
-	# Calls a function in the model that emits a signal to update the view
+	view.player_draw_card(model.player_hand[model.draw_card(model.player_hand)])
 
 func _on_split_hit_button_2_button_down() -> void:
-	view.view_player_split_hand_2.add_child(model.player_hand_split[model.draw_card(model.player_hand_split)])
-	# Calls a function in the model that emits a signal to update the view
+	view.player_split_draw(model.player_hand_split[model.draw_card(model.player_hand_split)])
 
 func _on_model_hit_split_update() -> void:
 	view.view_player_split_hit_button_2.hide()
 
-# Botão confirmar
 func _on_split_confirm_button_button_down() -> void:
 	view.view_player_split.hide()
 	dealer_turn()
@@ -124,17 +111,13 @@ func dealer_turn():
 	
 	if model.player_split:
 		view.show_view_dealer_split(model.player_hand_split_score)
-	else:
-		view.view_dealer_player_split_score.hide()
+
 	
 	view.show_view_dealer()
-	#view.view_dealer.show()
 	view.update_score(model.player_hand_score, model.player_hand_score, model.player_hand_split_score)
 	
 	view.view_player_dealer_hand.remove_child(model.back_card)
 	model.dealer_turn()
-	
-	#view.view_dealer_score.text = "Pontos dealer: " + str(model.dealer_hand_score)
 	
 	if model.player_split: 
 		model.dealer_score(model.player_hand_split_score)

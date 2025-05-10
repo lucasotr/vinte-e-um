@@ -80,6 +80,17 @@ func update_score(score: int, split_1: int, split_2:int):
 @onready var view_player_split_hand_2: HBoxContainer = $ViewPlayerSplit/SplitPlayerUI/VBoxContainer2/SplitHand2
 
 @onready var view_player_split_bet_label: Label = $ViewPlayerSplit/SplitPlayerUI/VBoxContainer3/SplitBetLabel
+
+func show_view_split():
+	view_player_split_button.hide()
+	view_player.hide()
+	view_player_split_hit_button_2.show()
+	view_player_dealer_hand.reparent(view_player_split_dealer_hand)
+	view_player_player_hand.reparent(view_player_split_hand_1)
+
+func player_split_draw(card: Card):
+	view_player_split_hand_2.add_child(card)
+
 #endregion
 
 #region View Dealer
@@ -114,4 +125,7 @@ func view_dealer_restart():
 	view_player_player_container.move_child(view_player_player_hand, 0)
 	view_player_dealer_hand.reparent(view_player)
 	view_player.move_child(view_player_dealer_hand, 0)
+	
+	view_player_score_label.reparent(view_player_displayer)
+	view_bet_label_bank.reparent(view_bet_display_container)
 #endregion
